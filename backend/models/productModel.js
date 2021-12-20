@@ -35,21 +35,23 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter product category"],
   },
-
   stock: {
     type: Number,
     required: [true, "Please enter stock"],
     maxLength: [3, "Stock cannot exceed 3 digits"],
     default: 1,
   },
-
   numOfReviews: {
     type: Number,
     default: 0,
   },
-
   reviews: [
     {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
       name: { type: String, required: true },
       rating: { type: Number, required: true },
       comment: { type: String, required: true },
